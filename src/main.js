@@ -27,6 +27,8 @@ function hideLoadMore() {
 
 let inputValue;
 let currentPage = 1;
+let maxPage = 0;
+const perPage = 15;
 
 form.addEventListener("submit", sendForm);
 
@@ -37,20 +39,19 @@ async function sendForm(event) {
   currentPage = 1;
   const inputValue = event.target.elements.search.value.trim();
   if (inputValue !== "") {
+    try {
     const data = await getImage(inputValue, currentPage);
+    maxPage = Math.ceil(data.totalHits / perPage)
     renderImages(data.hits);
-    form.reset();
-    showLoadMore();
-    // .catch((error) => {
-    // console.log(error);
-    // iziToast.error({
-    //   message: 'Sorry, an error occurred while loading. Please try again!',
-    //   theme: 'dark',
-    //   progressBarColor: '#FFFFFF',
-    //   color: '#EF4040',
-    //   position: 'topRight',
-    // })
-    hideLoader();
+    } catch (error) {
+      iziToast.error({
+      message: 'Sorry, an error occurred while loading. Please try again!',
+      theme: 'dark',
+      progressBarColor: '#FFFFFF',
+      color: '#EF4040',
+      position: 'topRight',
+    })
+  }
   } else {
     iziToast.show({
       message: 'Please complete the field!',
@@ -61,15 +62,27 @@ async function sendForm(event) {
     });
   };
   hideLoader();
+  form.reset();
+  checkButtonStatus();
 };
 
 buttonLoadMore.addEventListener("click", onLoadMore);
 
 async function onLoadMore() {
   currentPage += 1;
+  showLoader();
   const data = await getImage(inputValue, currentPage);
   renderImages(data.hits);
-  showLoadMore();
+  hideLoader();
+  checkButtonStatus();
 }
+
+function checkButtonStatus() {
+  if (currentPage >= maxPage) {
+    hideLoadMore()
+  } else {
+  showLoadMore();
+  }
+};
 
 
