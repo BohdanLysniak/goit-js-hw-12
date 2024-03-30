@@ -77,11 +77,18 @@ async function onLoadMore() {
   renderImages(data.hits);
   hideLoader();
   checkButtonStatus();
-}
+};
 
 function checkButtonStatus() {
   if (currentPage >= maxPage) {
-    hideLoadMore()
+    hideLoadMore();
+      iziToast.show({
+      message: "We're sorry, but you've reached the end of search results.",
+      theme: 'dark',
+      progressBarColor: '#FFFFFF',
+      color: 'blue',
+      position: 'topRight',
+    });
   } else {
   showLoadMore();
   }
