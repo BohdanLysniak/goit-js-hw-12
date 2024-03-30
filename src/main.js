@@ -23,13 +23,6 @@ function showLoadMore() {
 };
 function hideLoadMore() {
   buttonLoadMore.classList.add("is-hidden");
-      iziToast.show({
-      message: "We're sorry, but you've reached the end of search results.",
-      theme: "dark",
-      progressBarColor: "#FFFFFF",
-      color: "blue",
-      position: "topRight",
-    });
 };
 
 let inputValue;
@@ -89,6 +82,13 @@ async function onLoadMore() {
 function checkButtonStatus() {
   if (currentPage >= maxPage) {
     hideLoadMore();
+      iziToast.show({
+      message: "We're sorry, but you've reached the end of search results.",
+      theme: "dark",
+      progressBarColor: "#FFFFFF",
+      color: "blue",
+      position: "topRight",
+    });
   } else {
   showLoadMore();
   }
