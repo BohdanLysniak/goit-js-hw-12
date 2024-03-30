@@ -43,7 +43,8 @@ async function sendForm(event) {
     try {
     const data = await getImage(inputValue, currentPage);
     maxPage = Math.ceil(data.totalHits / perPage)
-    renderImages(data.hits);
+      renderImages(data.hits);
+      checkButtonStatus();
     } catch (error) {
       iziToast.error({
       message: 'Sorry, an error occurred while loading. Please try again!',
@@ -64,7 +65,6 @@ async function sendForm(event) {
   };
   hideLoader();
   form.reset();
-  checkButtonStatus();
 };
 
 buttonLoadMore.addEventListener("click", onLoadMore);
