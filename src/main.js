@@ -15,14 +15,21 @@ function showLoader() {
   preloader.classList.remove("is-hidden")
 };
 export function hideLoader() {
-  preloader.classList.add("is-hidden")
+  preloader.classList.add("is-hidden");
 };
 
 function showLoadMore() { 
   buttonLoadMore.classList.remove("is-hidden");
 };
 function hideLoadMore() {
-  buttonLoadMore.classList.add("is-hidden")
+  buttonLoadMore.classList.add("is-hidden");
+      iziToast.show({
+      message: "We're sorry, but you've reached the end of search results.",
+      theme: "dark",
+      progressBarColor: "#FFFFFF",
+      color: "blue",
+      position: "topRight",
+    });
 };
 
 let inputValue;
@@ -82,13 +89,6 @@ async function onLoadMore() {
 function checkButtonStatus() {
   if (currentPage >= maxPage) {
     hideLoadMore();
-      iziToast.show({
-      message: "We're sorry, but you've reached the end of search results.",
-      theme: 'dark',
-      progressBarColor: '#FFFFFF',
-      color: 'blue',
-      position: 'topRight',
-    });
   } else {
   showLoadMore();
   }
