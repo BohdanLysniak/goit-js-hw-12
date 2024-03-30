@@ -22,7 +22,7 @@ export function renderImages(arr) {
   } else {
     const markup = arr.map((image) => {
       return `<li class="item-image"><a class="photos-list-link" href="${image.largeImageURL}">
-  <img class="photo" src="${image.webformatURL}" alt="${image.tags}"/>
+  <img class="photo" loading="lazy" src="${image.webformatURL}" alt="${image.tags}"/>
   </a>
   <ul class="photo-information-container">
   <li class="item-photo-information-container"><p><span class="accent">Likes</span>${image.likes}</p></li>

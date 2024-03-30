@@ -9,15 +9,24 @@ export const lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', 
 
 export const preloader = document.querySelector(".loader");
 const form = document.querySelector(".search-form");
+const buttonLoadMore = document.querySelector(".btn-load-more")
 
 function showLoader() {
   preloader.classList.remove("is-hidden")
 };
 export function hideLoader() {
-preloader.classList.add("is-hidden")
+  preloader.classList.add("is-hidden")
 };
 
-let currentPage;
+function showLoadMore() { 
+  buttonLoadMore.classList.remove("is-hidden");
+};
+function hideLoadMore() {
+  buttonLoadMore.classList.add("is-hidden")
+};
+
+let inputValue;
+let currentPage = 1;
 
 form.addEventListener("submit", sendForm);
 
@@ -25,11 +34,13 @@ async function sendForm(event) {
   event.preventDefault();
   showLoader();
   card.innerHTML = "";
+  currentPage = 1;
   const inputValue = event.target.elements.search.value.trim();
   if (inputValue !== "") {
     const data = await getImage(inputValue, currentPage);
     renderImages(data.hits);
     form.reset();
+    showLoadMore();
     // .catch((error) => {
     // console.log(error);
     // iziToast.error({
@@ -51,5 +62,14 @@ async function sendForm(event) {
     hideLoader();
   };
 };
+
+buttonLoadMore.addEventListener("click", onLoadMore);
+
+async function onLoadMore() {
+  currentPage += 1;
+  const data = await getImage(inputValue, currentPage);
+  renderImages(data.hits);
+  showLoadMore();
+}
 
 
