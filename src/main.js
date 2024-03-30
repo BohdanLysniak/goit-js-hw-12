@@ -59,8 +59,8 @@ async function sendForm(event) {
       color: '#EF4040',
       position: 'topRight',
     });
-    hideLoader();
   };
+  hideLoader();
 };
 
 buttonLoadMore.addEventListener("click", onLoadMore);
