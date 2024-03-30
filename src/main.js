@@ -17,29 +17,29 @@ export function hideLoader() {
 preloader.classList.add("is-hidden")
 };
 
+let currentPage;
 
 form.addEventListener("submit", sendForm);
 
-function sendForm(event) {
+async function sendForm(event) {
   event.preventDefault();
   showLoader();
   card.innerHTML = "";
   const inputValue = event.target.elements.search.value.trim();
   if (inputValue !== "") {
-    getImage(inputValue).then((resolve) => {
-      renderImages(resolve.hits);
-      form.reset();
-    }).catch((error) => {
-      console.log(error);
-      iziToast.error({
-        message: 'Sorry, an error occurred while loading. Please try again!',
-        theme: 'dark',
-        progressBarColor: '#FFFFFF',
-        color: '#EF4040',
-        position: 'topRight',
-      })
-      hideLoader();
-    });
+    const data = await getImage(inputValue, currentPage);
+    renderImages(data.hits);
+    form.reset();
+    // .catch((error) => {
+    // console.log(error);
+    // iziToast.error({
+    //   message: 'Sorry, an error occurred while loading. Please try again!',
+    //   theme: 'dark',
+    //   progressBarColor: '#FFFFFF',
+    //   color: '#EF4040',
+    //   position: 'topRight',
+    // })
+    hideLoader();
   } else {
     iziToast.show({
       message: 'Please complete the field!',
