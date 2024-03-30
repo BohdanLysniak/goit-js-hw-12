@@ -34,6 +34,7 @@ form.addEventListener("submit", sendForm);
 
 async function sendForm(event) {
   event.preventDefault();
+  hideLoadMore();
   showLoader();
   card.innerHTML = "";
   currentPage = 1;
@@ -70,6 +71,7 @@ buttonLoadMore.addEventListener("click", onLoadMore);
 
 async function onLoadMore() {
   currentPage += 1;
+  hideLoadMore();
   showLoader();
   const data = await getImage(inputValue, currentPage);
   renderImages(data.hits);
