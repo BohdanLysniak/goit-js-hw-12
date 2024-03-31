@@ -38,16 +38,7 @@ async function sendForm(event) {
   showLoader();
   card.innerHTML = "";
   currentPage = 1;
-  const inputValue = event.target.elements.search.value.trim();
-  if (!inputValue) {
-      iziToast.show({
-      message: 'Please complete the field!',
-      theme: 'dark',
-      progressBarColor: '#FFFFFF',
-      color: '#EF4040',
-      position: 'topRight',
-    });
-  }
+  inputValue = event.target.elements.search.value.trim();
   if (inputValue !== "") {
     try {
     const data = await getImage(inputValue, currentPage);
@@ -62,21 +53,15 @@ async function sendForm(event) {
       color: '#EF4040',
       position: 'topRight',
     })
-    };
-
-
-  // if (!arr.length) {
-  //   iziToast.error({
-  //     message: 'Sorry, there are no images matching your search query. Please try again!',
-  //     theme: 'dark',
-  //     progressBarColor: '#FFFFFF',
-  //     color: '#EF4040',
-  //     position: 'topRight',
-  //   });
-  // } 
-
+  }
   } else {
-
+    iziToast.show({
+      message: 'Please complete the field!',
+      theme: 'dark',
+      progressBarColor: '#FFFFFF',
+      color: '#EF4040',
+      position: 'topRight',
+    });
   };
   hideLoader();
   form.reset();
@@ -88,7 +73,7 @@ async function onLoadMore() {
   currentPage += 1;
   hideLoadMore();
   showLoader();
-  try {  const data = await getImage(inputValue, currentPage);
+  try {const data = await getImage(inputValue, currentPage);
     renderImages(data.hits);
   } catch (error) {
       iziToast.error({

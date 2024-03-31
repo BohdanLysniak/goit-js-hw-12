@@ -7,6 +7,15 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 export const card = document.querySelector(".gallery");
 
 export function renderImages(arr) {
+  if (arr.length === 0) {
+    iziToast.error({
+      message: 'Sorry, there are no images matching your search query. Please try again!',
+      theme: 'dark',
+      progressBarColor: '#FFFFFF',
+      color: '#EF4040',
+      position: 'topRight',
+    });
+  } else {
     const markup = arr.map((image) => {
       return `<li class="item-image"><a class="photos-list-link" href="${image.largeImageURL}">
   <img class="photo" loading="lazy" src="${image.webformatURL}" alt="${image.tags}"/>
@@ -23,3 +32,4 @@ export function renderImages(arr) {
     card.insertAdjacentHTML("beforeend", markup);
     lightbox.refresh();
   };
+};
