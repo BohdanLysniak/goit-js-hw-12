@@ -147,6 +147,10 @@ img {
   visibility: hidden;
 }
 
+.loader-wrapper {
+  position: relative;
+}
+
 .loader {
   width: 48px;
   height: 48px;
@@ -157,11 +161,11 @@ img {
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
   margin: auto;
-  /* top: 0;
+  top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  position: absolute; */
+  position: absolute;
 }
 
 @keyframes rotation {
@@ -171,4 +175,26 @@ img {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-load-more {
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 125px;
+  height: 40px;
+  margin-top: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #4e75ff;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  color: #fff;
+  border: transparent;
 }
