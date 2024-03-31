@@ -7,7 +7,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 export const card = document.querySelector(".gallery");
 
 export function renderImages(arr) {
-  if (arr.length === 0) {
+  if (!arr.length) {
     iziToast.error({
       message: 'Sorry, there are no images matching your search query. Please try again!',
       theme: 'dark',
