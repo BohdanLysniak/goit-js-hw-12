@@ -39,22 +39,7 @@ async function sendForm(event) {
   card.innerHTML = "";
   currentPage = 1;
   inputValue = event.target.elements.search.value.trim();
-  if (inputValue !== "") {
-    try {
-    const data = await getImage(inputValue, currentPage);
-    maxPage = Math.ceil(data.totalHits / perPage)
-      renderImages(data.hits);
-      checkButtonStatus();
-    } catch (error) {
-      iziToast.error({
-      message: 'Sorry, an error occurred while loading. Please try again!',
-      theme: 'dark',
-      progressBarColor: '#FFFFFF',
-      color: '#EF4040',
-      position: 'topRight',
-    })
-  }
-  } else {
+  if (!inputValue) {
     iziToast.show({
       message: 'Please complete the field!',
       theme: 'dark',
@@ -63,6 +48,38 @@ async function sendForm(event) {
       position: 'topRight',
     });
   };
+    try {
+    const data = await getImage(inputValue, currentPage);
+      maxPage = Math.ceil(data.totalHits / perPage)
+      if (arr.length === 0) {
+      iziToast.error({
+      message: 'Sorry, there are no images matching your search query. Please try again!',
+      theme: 'dark',
+      progressBarColor: '#FFFFFF',
+      color: '#EF4040',
+      position: 'topRight',
+    });
+      } else { renderImages(data.hits) };
+      // renderImages(data.hits);
+      // checkButtonStatus();
+    } catch (error) {
+      iziToast.error({
+      message: 'Sorry, an error occurred while loading. Please try again!',
+      theme: 'dark',
+      progressBarColor: '#FFFFFF',
+      color: '#EF4040',
+      position: 'topRight',
+    })
+  };
+  // else {
+    // iziToast.show({
+    //   message: 'Please complete the field!',
+    //   theme: 'dark',
+    //   progressBarColor: '#FFFFFF',
+    //   color: '#EF4040',
+    //   position: 'topRight',
+    // });
+  // };
   hideLoader();
   form.reset();
 };
