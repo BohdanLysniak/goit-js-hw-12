@@ -73,9 +73,19 @@ async function onLoadMore() {
   currentPage += 1;
   hideLoadMore();
   showLoader();
-  const data = await getImage(inputValue, currentPage);
-  renderImages(data.hits);
+  try {  const data = await getImage(inputValue, currentPage);
+    renderImages(data.hits);
+  } catch (error) {
+      iziToast.error({
+      message: 'Sorry, an error occurred while loading. Please try again!',
+      theme: 'dark',
+      progressBarColor: '#FFFFFF',
+      color: '#EF4040',
+      position: 'topRight',
+    })
+  }
   hideLoader();
+  myScroll();
   checkButtonStatus();
 };
 
@@ -93,5 +103,14 @@ function checkButtonStatus() {
   showLoadMore();
   }
 };
+
+function myScroll() {
+  const height = card.firstChild.getBoundingClientRect().height;
+
+  scrollBy({
+    top: height,
+    behavior: 'smooth',
+  });
+}
 
 
