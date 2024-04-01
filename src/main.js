@@ -117,9 +117,10 @@ function checkButtonStatus() {
 };
 
 function myScroll() {
-  const height = card.getBoundingClientRect().height;
+  const height = card.firstChild.getBoundingClientRect().height;
+
   scrollBy({
     top: height,
     behavior: 'smooth',
   });
-};
+}
