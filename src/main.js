@@ -104,7 +104,7 @@ async function onLoadMore() {
 function checkButtonStatus() {
   if (currentPage >= maxPage) {
     hideLoadMore();
-    iziToast.show({
+    iziToast.info({
       message: "We're sorry, but you've reached the end of search results.",
       theme: "dark",
       progressBarColor: "#FFFFFF",
