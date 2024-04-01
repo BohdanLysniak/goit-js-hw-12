@@ -14,16 +14,16 @@ const card = document.querySelector(".gallery");
 
 function showLoader() {
   preloader.classList.remove("is-hidden");
-};
+}
 export function hideLoader() {
   preloader.classList.add("is-hidden");
-};
+}
 function showLoadMore() {
   buttonLoadMore.classList.remove("is-hidden");
-};
+}
 function hideLoadMore() {
   buttonLoadMore.classList.add("is-hidden");
-};
+}
 
 let inputValue;
 let currentPage = 1;
@@ -76,7 +76,7 @@ async function sendForm(event) {
   }
   hideLoader();
   form.reset();
-};
+}
 
 buttonLoadMore.addEventListener("click", onLoadMore);
 
@@ -99,7 +99,7 @@ async function onLoadMore() {
   hideLoader();
   myScroll();
   checkButtonStatus();
-};
+}
 
 function checkButtonStatus() {
   if (currentPage >= maxPage) {
@@ -114,7 +114,7 @@ function checkButtonStatus() {
   } else {
     showLoadMore();
   }
-};
+}
 
 function myScroll() {
   const height = card.firstChild.getBoundingClientRect().height;
